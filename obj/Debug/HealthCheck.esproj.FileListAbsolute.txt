@@ -1,0 +1,2 @@
+C:\Users\beef_\source\repos\HealthCheck\HealthCheck\obj\Debug\HealthCheck.esproj.SuggestedBindingRedirects.cache
+C:\Users\beef_\source\repos\HealthCheck\HealthCheck\obj\Debug\HealthCheck.esproj.CoreCompileInputs.cache
