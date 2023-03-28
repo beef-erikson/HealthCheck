@@ -18,7 +18,7 @@ namespace HealthCheckAPI.Controllers
         {
             _logger = logger;
             var defaultLogLevel = configuration["Logging:LogLevel:Default"];
-            Console.WriteLine($"Currently logging: {defaultLogLevel}");
+            Console.WriteLine($"Log level is set to log ${defaultLogLevel}");
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
