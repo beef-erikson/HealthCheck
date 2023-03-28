@@ -23,7 +23,6 @@ namespace HealthCheckAPI.Controllers
         {
             _logger = logger;
             var defaultLogLevel = configuration["Logging:LogLevel:Default"];
-            Console.WriteLine($"Log level is set to log {defaultLogLevel}");
         }
 
         /// <summary>
