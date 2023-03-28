@@ -13,6 +13,11 @@ namespace HealthCheckAPI.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
+        /// <summary>
+        /// Sets up logging.
+        /// </summary>
+        /// <param name="logger">Ilogger</param>
+        /// <param name="configuration">IConfiguration</param>
         public WeatherForecastController(ILogger<WeatherForecastController> logger,
             IConfiguration configuration)
         {
@@ -21,6 +26,10 @@ namespace HealthCheckAPI.Controllers
             Console.WriteLine($"Log level is set to log {defaultLogLevel}");
         }
 
+        /// <summary>
+        /// Gets the weather forecast based on dummy data.
+        /// </summary>
+        /// <returns>IEnumerable of WeatherForecast containing Date, TemperatureC, Summary</returns>
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
