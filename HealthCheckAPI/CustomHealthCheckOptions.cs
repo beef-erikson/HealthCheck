@@ -26,7 +26,7 @@ namespace HealthCheckAPI
                             name = e.Key,
                             responseTime = e.Value.Duration.TotalMilliseconds,
                             status = e.Value.Status.ToString(),
-                            descrption = e.Value.Description
+                            description = e.Value.Description
                         }),
 
                         totalStatus = r.Status,
