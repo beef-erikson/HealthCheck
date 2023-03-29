@@ -1,12 +1,19 @@
-﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Net.NetworkInformation;
 
 namespace HealthCheckAPI
 {
     public class ICMPHealthCheck : IHealthCheck
     {
-        private readonly string Host = $"www.programming-with-a-bot.com";
-        private readonly int HealthyRoundtripTime = 300;
+        private readonly string Host;
+        private readonly int HealthyRoundtripTime;
+
+        public ICMPHealthCheck(string host, int healthyRoundtripTime)
+        {
+            Host = host;
+            HealthyRoundtripTime = healthyRoundtripTime;
+        }
 
         public async Task<HealthCheckResult> CheckHealthAsync(
             HealthCheckContext context,
@@ -20,16 +27,19 @@ namespace HealthCheckAPI
                 switch (reply.Status)
                 {
                     case IPStatus.Success:
+                        var message = $"ICMP to {Host} took {reply.RoundtripTime} ms.";
                         return (reply.RoundtripTime > HealthyRoundtripTime)
-                            ? HealthCheckResult.Degraded()
-                            : HealthCheckResult.Healthy();
+                            ? HealthCheckResult.Degraded(message)
+                            : HealthCheckResult.Healthy(message);
                     default:
-                        return HealthCheckResult.Unhealthy();
+                        var error = $"ICMP to {Host} failed: {reply.Status}";
+                        return HealthCheckResult.Unhealthy(error);
                 }
             }
             catch (Exception e) 
             {
-                return HealthCheckResult.Unhealthy();
+                var error = $"ICMP to {Host} failed: {e.Message}";
+                return HealthCheckResult.Unhealthy(error);
             }
         }
     }
